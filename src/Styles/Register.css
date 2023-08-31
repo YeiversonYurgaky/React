@@ -1,0 +1,27 @@
+.main {
+  @apply bg-gray-100 flex items-center justify-center h-screen;
+  background-image: url("../assets/background-main.svg");
+}
+
+.inputs {
+  @apply h-10 w-[18.625rem] border-none rounded-[1.25rem] bg-[#e8e6ff] px-[3.125rem] flex flex-col justify-center items-center bg-contain bg-no-repeat bg-[0.625rem] outline-none;
+}
+
+#name-img {
+  background-image: url(../assets/text-field-focus-svgrepo-com.svg);
+}
+#lastname-img {
+  background-image: url(../assets/text-field-focus-svgrepo-com.svg);
+}
+
+#email-img {
+  background-image: url(../assets/email-svgrepo-com.svg);
+}
+
+#user2-img {
+  background-image: url(../Assets/user-svgrepo-com.svg);
+}
+
+#password2-img {
+  background-image: url(../Assets/password-svgrepo-com.svg);
+}

@@ -1,5 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
+import ButtonLogin from "./ButtonLogin";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import ButtonGoToRegister from "./ButtonGoToRegister";
+
 function FormularioLogin() {
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const goToRegister = () => {
+    navigate("/register");
+  };
+  const inicioSesion = async (e) => {
+    e.preventDefault();
+    console.log(" :", user);
+    console.log("Password:", password);
+
+    const data = {
+      usuario: user,
+      password: password,
+    };
+
+    //consumo del servicio
+    await axios
+      .post("http://89.116.25.43:3500/api/login", data)
+      .then((resp) => {
+        console.log(resp);
+        localStorage.setItem("token", resp.data.jwt);
+        localStorage.setItem("user", resp.data.user);
+        localStorage.setItem("username", resp.data.user.usuario);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div>
@@ -8,13 +44,23 @@ function FormularioLogin() {
             Ingresar
           </h4>
           <div className="flex justify-center items-center mb-3 mt-8">
-            <input className="inputs" id="user-img" type="text" />
+            <input
+              onChange={(e) => {
+                setUser(e.target.value);
+              }}
+              className="inputs"
+              id="user-img"
+              type="text"
+            />
           </div>
           <div className="mb-[1.875rem]">
             <input
               className="h-10 w-[18.625rem] border-none rounded-[1.25rem] bg-[#e8e6ff] px-[3.125rem] flex flex-col justify-center items-center bg-contain bg-no-repeat bg-[0.625rem] outline-none mt-3"
               id="password-img"
               type="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
           <div className="mb-[1.125rem] flex justify-between gap-[0.313rem]">
@@ -39,9 +85,13 @@ function FormularioLogin() {
             </a>
           </div>
           <div>
-            <button className="text-white border-none font-bold tracking-[0.125rem] w-[8.625rem] h-[2.5rem] rounded-[1.25rem] transition-transform duration-200 ease-in bg-gradient-to-r from-[#766ce7] via-[#bf6fb7] to-[#e07c7f] hover:scale-110 hover:brightness-[1.1] hover:shadow-md hover:text-white">
-              INGRESAR
-            </button>
+            <ButtonLogin fnInicioSesion={inicioSesion} label="Ingresar" />
+          </div>
+          <div>
+            <hr className="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
+          </div>
+          <div>
+            <ButtonGoToRegister fnIrARegistro={goToRegister} />
           </div>
         </form>
       </div>
