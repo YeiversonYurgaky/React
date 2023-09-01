@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ButtonRegister from "./ButtonRegister";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ConfirmationAlert from "./ConfirmationAlert";
+import RegistrationSuccessAlert from "./RegistrationSuccessAlert";
 
 const FormularioRegister = () => {
   const [name, setName] = useState("");
@@ -32,10 +32,11 @@ const FormularioRegister = () => {
       .post("http://89.116.25.43:3500/api/usuarios/registrar", data)
       .then((resp) => {
         console.log(resp);
-        localStorage.setItem("token", resp.data.jwt);
-        localStorage.setItem("user", resp.data.result);
+        localStorage.setItem("result", resp.data.result);
+        localStorage.setItem("id", resp.data.result._id);
+        localStorage.setItem("id", resp.data.result.email);
         localStorage.setItem("username", resp.data.result.usuario);
-        <ConfirmationAlert />;
+        RegistrationSuccessAlert();
         navigate("/");
       })
       .catch((error) => {

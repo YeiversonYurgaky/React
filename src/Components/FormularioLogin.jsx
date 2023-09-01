@@ -3,6 +3,7 @@ import ButtonLogin from "./ButtonLogin";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonGoToRegister from "./ButtonGoToRegister";
+import RegistrationSuccessAlert from "./RegistrationSuccessAlert";
 
 function FormularioLogin() {
   const [user, setUser] = useState("");
@@ -91,7 +92,10 @@ function FormularioLogin() {
             <hr className="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
           </div>
           <div>
-            <ButtonGoToRegister fnIrARegistro={goToRegister} />
+            <ButtonGoToRegister
+              fnIrARegistro={goToRegister}
+              label="Registarse"
+            />
           </div>
         </form>
       </div>
