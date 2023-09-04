@@ -34,7 +34,7 @@ const FormularioRegister = () => {
         console.log(resp);
         localStorage.setItem("result", resp.data.result);
         localStorage.setItem("id", resp.data.result._id);
-        localStorage.setItem("id", resp.data.result.email);
+        localStorage.setItem("email", resp.data.result.email);
         localStorage.setItem("username", resp.data.result.usuario);
         RegistrationSuccessAlert();
         navigate("/");

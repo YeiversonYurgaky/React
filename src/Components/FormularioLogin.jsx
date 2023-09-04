@@ -52,6 +52,7 @@ function FormularioLogin() {
               className="inputs"
               id="user-img"
               type="text"
+              placeholder="Usuario"
             />
           </div>
           <div className="mb-[1.875rem]">
@@ -59,6 +60,7 @@ function FormularioLogin() {
               className="h-10 w-[18.625rem] border-none rounded-[1.25rem] bg-[#e8e6ff] px-[3.125rem] flex flex-col justify-center items-center bg-contain bg-no-repeat bg-[0.625rem] outline-none mt-3"
               id="password-img"
               type="password"
+              placeholder="Contraseña"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
