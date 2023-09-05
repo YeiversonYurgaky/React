@@ -11,6 +11,7 @@ const FormularioRegister = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const registarse = async (e) => {
     e.preventDefault();
@@ -32,15 +33,12 @@ const FormularioRegister = () => {
       .post("http://89.116.25.43:3500/api/usuarios/registrar", data)
       .then((resp) => {
         console.log(resp);
-        localStorage.setItem("result", resp.data.result);
-        localStorage.setItem("id", resp.data.result._id);
-        localStorage.setItem("email", resp.data.result.email);
-        localStorage.setItem("username", resp.data.result.usuario);
         RegistrationSuccessAlert();
         navigate("/");
       })
       .catch((error) => {
         console.log(error);
+        setError("Llena todos los campos");
       });
   };
 
@@ -112,8 +110,9 @@ const FormularioRegister = () => {
             />
           </div>
           <div>
-            <ButtonRegister fnRegistarse={registarse} label="Registarse" />
+            <ButtonRegister fnRegistarse={registarse} label="Registrarse" />
           </div>
+          {error && <p className="text-red-500">{error}</p>}
         </form>
       </main>
     </div>

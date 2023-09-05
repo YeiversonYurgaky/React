@@ -3,11 +3,11 @@ import ButtonLogin from "./ButtonLogin";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonGoToRegister from "./ButtonGoToRegister";
-import RegistrationSuccessAlert from "./RegistrationSuccessAlert";
 
 function FormularioLogin() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const goToRegister = () => {
     navigate("/register");
@@ -34,6 +34,7 @@ function FormularioLogin() {
       })
       .catch((error) => {
         console.log(error);
+        setError("Usuario o contraseña incorrectos");
       });
   };
 
@@ -90,6 +91,7 @@ function FormularioLogin() {
           <div>
             <ButtonLogin fnInicioSesion={inicioSesion} label="Ingresar" />
           </div>
+          {error && <p className="text-red-500">{error}</p>}
           <div>
             <hr className="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
           </div>
