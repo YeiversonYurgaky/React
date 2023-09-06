@@ -11,7 +11,6 @@ const FormularioRegister = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [error, setError] = useState("");
 
   const registarse = async (e) => {
     e.preventDefault();
@@ -22,8 +21,8 @@ const FormularioRegister = () => {
     console.log("Password:", password);
 
     const data = {
-      nombre: name,
-      apellido: lastName,
+      nombres: name,
+      apellidos: lastName,
       email: emailU,
       usuario: user,
       password: password,
@@ -32,13 +31,16 @@ const FormularioRegister = () => {
     await axios
       .post("http://89.116.25.43:3500/api/usuarios/registrar", data)
       .then((resp) => {
-        console.log(resp);
+        console.log(resp); //es error 200
         RegistrationSuccessAlert();
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
-        setError("Llena todos los campos");
+        if (error.response.status === 400) {
+          Swal.fire("Informacion!", error.response.data.message, "error");
+        } else {
+          Swal.fire("Informacion!", "Ocurrio un error", "error");
+        }
       });
   };
 
@@ -112,7 +114,6 @@ const FormularioRegister = () => {
           <div>
             <ButtonRegister fnRegistarse={registarse} label="Registrarse" />
           </div>
-          {error && <p className="text-red-500">{error}</p>}
         </form>
       </main>
     </div>
