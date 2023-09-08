@@ -3,6 +3,7 @@ import ButtonRegister from "./ButtonRegister";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import RegistrationSuccessAlert from "./RegistrationSuccessAlert";
+import Swal from "sweetalert2";
 
 const FormularioRegister = () => {
   const [name, setName] = useState("");
